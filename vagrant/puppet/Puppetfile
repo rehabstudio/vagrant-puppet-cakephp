@@ -1,0 +1,16 @@
+forge "http://forge.puppetlabs.com"
+
+mod 'apt', :git => 'git://github.com/puppetlabs/puppetlabs-apt.git'
+mod 'archive', :git => 'https://github.com/camptocamp/puppet-archive.git'
+mod 'composer', :git => 'https://github.com/tPl0ch/puppet-composer.git'
+mod 'concat', :git => 'https://github.com/puppetlabs/puppetlabs-concat.git'
+mod 'locales', :git => 'https://github.com/attachmentgenie/puppet-module-locales.git'
+mod 'mysql', :git => 'https://github.com/puppetlabs/puppetlabs-mysql.git'
+mod 'nginx', :git => 'https://github.com/openquery/puppet-nginx'
+mod 'ntp', :git => 'https://github.com/puppetlabs/puppetlabs-ntp.git'
+mod 'nodejs', :git => 'https://github.com/puppetlabs/puppetlabs-nodejs.git'
+mod "ohmyzsh", :git => 'https://github.com/acme/puppet-acme-oh-my-zsh.git'
+mod "php", :git => 'https://github.com/example42/puppet-php.git'
+mod 'rbenv', :git => 'https://github.com/alup/puppet-rbenv.git'
+mod 'stdlib', :git => 'https://github.com/puppetlabs/puppetlabs-stdlib.git'
+mod 'xdebug', :git => 'https://github.com/puphpet/puphpet-xdebug.git'
