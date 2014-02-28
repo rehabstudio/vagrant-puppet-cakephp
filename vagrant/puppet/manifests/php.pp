@@ -102,6 +102,13 @@ composer::project { 'app':
   dev            => true,
 }
 
+composer::exec { 'update':
+  cmd         => 'update',
+  cwd         => $cakephp_values['target_dir'],
+  interaction => false,
+  dev         => true,
+}
+
 define php_mod {
   php::module { $name:
     service_autorestart => $php_webserver_restart,
