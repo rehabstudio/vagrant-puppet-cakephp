@@ -1,0 +1,10 @@
+.vagrant
+logs/*.log
+.tmp/
+.rbenv/
+.profile
+.rbenvrc
+cache/
+puppet/modules/*/*
+Capfile
+config/deploy/*

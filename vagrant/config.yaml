@@ -1,0 +1,136 @@
+vm:
+    box_url: "http://box.puphpet.com/ubuntu-precise12042-x64-vbox43.box"
+    box: "rehabstudio-1"
+    hostname: app.dev
+    network:
+        private_network: "192.168.99.16"
+        forwarded_port: []
+            # ssh:
+            #     host: '7564'
+            #     guest: '22'
+    provider:
+        virtualbox:
+            modifyvm:
+                name: "My app"
+                natdnshostresolver1: on
+                memory: '512'
+    provision:
+        puppet:
+            manifests_path: vagrant/puppet/manifests
+            manifest_file: init.pp
+            options:
+                - '--verbose'
+                - '--hiera_config /vagrant/vagrant/puppet/hiera.yaml'
+                - '--parser future'
+    synced_folder:
+        vagrant:
+            id: vagrant-root
+            source: ./
+            target: /var/www
+            nfs: 'false'
+            mount_options: [
+                "dmode=777",
+                "fmode=777"]
+ssh:
+    host: null
+    port: null
+    private_key_path: null
+    username: vagrant
+    guest_port: null
+    keep_alive: true
+    forward_agent: false
+    forward_x11: false
+    shell: 'bash -l'
+vagrant:
+    host: detect
+ohmyzsh:
+    users:
+        - vagrant
+server:
+    packages:
+        - vim
+        - git-core
+        - libaugeas-ruby
+        - augeas-tools
+        - memcached
+        - zip
+        - unzip
+    dot_files:
+        -
+            bash_aliases: null
+    _prevent_empty: ''
+nginx:
+    vhosts:
+        app:
+            server_name: app.dev
+            www_root: /var/www/app.dev/webroot
+            listen_port: '80'
+            index_files:
+                - index.html
+                - index.htm
+                - index.php
+            envvars:
+                - 'APP_ENV dev'
+cakephp:
+    debug: '2'
+    project_name: 'friendsofcake/app-template'
+    target_dir: /var/www/app.dev
+php:
+    version: '55'
+    modules:
+        php:
+            - cli
+            - common
+            - curl
+            - fpm
+            - gd
+            - imagick
+            - intl
+            - mcrypt
+            - memcached
+            - xdebug
+        pear: {  }
+        pecl: {  }
+    ini:
+        display_errors: On
+        html_errors: On
+        post_max_size: '128M'
+        upload_max_filesize: '40M'
+        memory_limit: '40M'
+        error_reporting: '-1'
+        session.save_path: /var/lib/php/session
+    timezone: UTC
+xdebug:
+    install: '1'
+    settings:
+        xdebug.default_enable: '1'
+        xdebug.remote_autostart: '0'
+        xdebug.remote_connect_back: '1'
+        xdebug.remote_enable: '1'
+        xdebug.remote_handler: dbgp
+        xdebug.remote_port: '9000'
+mysql:
+    root_password: '123456'
+    databases:
+        app:
+            grant:
+                - ALL
+            name: app
+            host: localhost
+            user: app
+            password: '123456'
+            sql_file: ''
+        app_test:
+            grant:
+                - ALL
+            name: app_test
+            host: localhost
+            user: app_test
+            password: '123456'
+            sql_file: ''
+nodejs:
+    packages:
+        - grunt-cli
+        - bower
+ruby:
+    version: '2.0.0-p247'
