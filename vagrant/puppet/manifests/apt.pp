@@ -23,6 +23,8 @@ apt::key { '4CBEDD5A':
 apt::ppa { 'ppa:pdoes/ppa': require => Apt::Key['4CBEDD5A'] }
 apt::ppa { 'ppa:ondrej/php5': require => Apt::Key['4F4EA0AAE5267A6C'] }
 
+class { 'apt::unattended_upgrades': }
+
 if !empty($server_values['packages']) {
   ensure_packages( $server_values['packages'] )
 }
