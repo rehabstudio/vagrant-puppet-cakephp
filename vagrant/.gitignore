@@ -8,3 +8,4 @@ cache/
 puppet/modules/*/*
 Capfile
 config/deploy/*
+.htaccess
