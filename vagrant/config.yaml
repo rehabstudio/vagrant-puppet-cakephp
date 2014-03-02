@@ -4,14 +4,15 @@ vm:
     hostname: app.dev
     network:
         private_network: "192.168.99.16"
-        forwarded_port: []
+        forwarded_port: [
             # ssh:
             #     host: '7564'
             #     guest: '22'
+        ]
     provider:
         virtualbox:
             modifyvm:
-                name: "My app"
+                name: "app"
                 natdnshostresolver1: on
                 memory: '512'
     provision:
@@ -26,7 +27,7 @@ vm:
         vagrant:
             id: vagrant-root
             source: ./
-            target: /var/www
+            target: /var/www/app
             nfs: 'false'
             mount_options: [
                 "dmode=777",
@@ -63,7 +64,7 @@ nginx:
     vhosts:
         app:
             server_name: app.dev
-            www_root: /var/www/app.dev/webroot
+            www_root: /var/www/app/webroot
             listen_port: '80'
             index_files:
                 - index.html
@@ -74,7 +75,7 @@ nginx:
 cakephp:
     debug: '2'
     project_name: 'friendsofcake/app-template'
-    target_dir: /var/www/app.dev
+    target_dir: /var/www/app
 php:
     version: '55'
     modules:
@@ -133,5 +134,4 @@ nodejs:
     packages:
         - grunt-cli
         - bower
-ruby:
-    version: '2.0.0-p247'
+    package_path: /var/www/app
