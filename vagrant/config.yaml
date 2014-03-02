@@ -86,8 +86,9 @@ php:
             - gd
             - imagick
             - intl
-            - mcrypt
             - memcached
+            - mcrypt
+            - mysql
             - xdebug
         pear: {  }
         pecl: {  }
