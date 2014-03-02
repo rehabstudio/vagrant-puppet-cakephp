@@ -2,9 +2,18 @@ if $mysql_values == undef {
   $mysql_values = hiera('mysql', false)
 }
 
+if $vm_values == undef {
+  $vm_values = hiera('vm', false)
+}
+
 if $mysql_values['root_password'] {
   class { 'mysql::server':
     root_password => $mysql_values['root_password'],
+    override_options => {
+      'mysqld' => {
+        'bind-address' => $vm_values['network']['private_network']
+      }
+    }
   }
 
   if is_hash($mysql_values['databases']) and count($mysql_values['databases']) > 0 {
