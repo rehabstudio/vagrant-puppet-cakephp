@@ -102,11 +102,17 @@ composer::project { 'app':
   dev            => true,
 }
 
-composer::exec { 'update':
-  cmd         => 'update',
-  cwd         => $cakephp_values['target_dir'],
-  interaction => false,
-  dev         => true,
+
+$composerfilepresent = file("${cakephp_values[target_dir]}/composer.json",'/dev/null')
+if ($composerfilepresent != '') {	
+  composer::exec { 'update':
+    cmd         => 'update',
+    cwd         => $cakephp_values['target_dir'],
+    interaction => true,
+    dev         => true,
+  }
+} else {
+  notice("No composer.json found in ${cakephp_values[target_dir]} so skipping composer::exec update")
 }
 
 define php_mod {
