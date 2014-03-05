@@ -44,5 +44,5 @@ $RECYCLE.BIN/
 
 # Vagrant
 .vagrant/
-
+vagrant2*
 composer.phar
